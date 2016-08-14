@@ -22,9 +22,9 @@
 # - All values MUST be placed inside 'single quotes'
 # - DO NOT use these characters within values:  \ " '
 
-YOUR_IPSEC_PSK=''
-YOUR_USERNAME=''
-YOUR_PASSWORD=''
+YOUR_IPSEC_PSK='happiness'
+YOUR_USERNAME='philtest'
+YOUR_PASSWORD='crafty1'
 
 # Important notes:   https://git.io/vpnnotes
 # Setup VPN clients: https://git.io/vpnclients
@@ -198,9 +198,10 @@ conn shared
   dpddelay=30
   dpdtimeout=120
   dpdaction=clear
-  ike=3des-sha1,aes-sha1
-  phase2alg=3des-sha1,aes-sha1
-
+  ike=3des-sha1,aes-sha1,aes256-sha2_256
+  phase2alg=3des-sha1,aes-sha1,aes256-sha2_256
+  sha2-truncbug=yes
+  
 conn l2tp-psk
   auto=add
   leftsubnet=$PRIVATE_IP/32
@@ -215,8 +216,7 @@ conn xauth-psk
   auto=add
   leftsubnet=0.0.0.0/0
   rightaddresspool=192.168.43.10-192.168.43.250
-  modecfgdns1=8.8.8.8
-  modecfgdns2=8.8.4.4
+  modecfgdns1=45.32.246.89
   leftxauthserver=yes
   rightxauthclient=yes
   leftmodecfgserver=yes
@@ -257,8 +257,7 @@ EOF
 cat > /etc/ppp/options.xl2tpd <<'EOF'
 ipcp-accept-local
 ipcp-accept-remote
-ms-dns 8.8.8.8
-ms-dns 8.8.4.4
+ms-dns 45.32.246.89
 noccp
 auth
 crtscts
@@ -269,6 +268,7 @@ proxyarp
 lcp-echo-failure 4
 lcp-echo-interval 30
 connect-delay 5000
+debug
 EOF
 
 # Create VPN credentials
