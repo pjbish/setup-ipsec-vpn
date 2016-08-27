@@ -216,7 +216,7 @@ conn xauth-psk
   auto=add
   leftsubnet=0.0.0.0/0
   rightaddresspool=192.168.43.10-192.168.43.250
-  modecfgdns1=45.32.246.89
+  modecfgdns1=8.8.8.8
   leftxauthserver=yes
   rightxauthclient=yes
   leftmodecfgserver=yes
@@ -257,7 +257,7 @@ EOF
 cat > /etc/ppp/options.xl2tpd <<'EOF'
 ipcp-accept-local
 ipcp-accept-remote
-ms-dns 45.32.246.89
+ms-dns 8.8.8.8
 noccp
 auth
 crtscts
